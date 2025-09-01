@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
 const buttons = document.querySelectorAll('[data-tab-button]');
+const questions= document.querySelectorAll('[data-faq-question]');
 
 for (let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener('click', function(botao) {
@@ -11,9 +12,20 @@ for (let i = 0; i < buttons.length; i++) {
 
         removeBotaoAtivo();
         botao.target.classList.add('shows__tabs__button--is-active');
-    });
+    })
     }
-});
+
+    for (let i = 0; i < questions.length; i++) {
+        questions [i] .addEventListener('click', abreOuFechaResposta);
+    }
+})
+
+function abreOuFechaResposta(elemento) {
+    const classe = 'faq__questions__item--is-open';
+    const elementoPai=elemento.target.parentNode;
+
+    elementoPai.classList.toggle(classe);
+}
 
 function removeBotaoAtivo() {
     const buttons = document.querySelectorAll('[data-tab-button]');
@@ -27,4 +39,21 @@ function escondeTodasAbas() {
     for (let i = 0; i < tabsContainer.length; i++) {
     tabsContainer[i].classList.remove('shows__list--is-active');
     }
+
+    document.querySelectorAll('.faq__questions__item__question').forEach(question => {
+question.addEventListener('click', () => {
+    const item = question.parentElement;
+
+    // Fecha todos os outros (opcional, estilo acordeão)
+    document.querySelectorAll('.faq__questions__item').forEach(el => {
+    if (el !== item) {
+        el.classList.remove('faq__questions__item--is-open');
+    }
+    });
+
+    // Alterna aberto/fechado do clicado
+    item.classList.toggle('faq__questions__item--is-open');
+});
+});
+
 }
