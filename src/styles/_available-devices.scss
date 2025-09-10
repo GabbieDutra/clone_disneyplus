@@ -35,7 +35,7 @@
 
 @media (max-width: 1024px) {
     .available-devices__list {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(1fr 1fr);
     }
 }
 
